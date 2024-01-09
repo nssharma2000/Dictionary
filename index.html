@@ -1,0 +1,66 @@
+<HTML>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <HEAD>
+        <TITLE>
+            Weather
+        </TITLE>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </HEAD>
+    <BODY>
+        <DIV CLASS="text-center">
+        <INPUT ID="WORD" PLACEHOLDER="Enter word">
+        <BUTTON ID="FETCH" CLASS="btn btn-primary" ONCLICK="f()">Fetch Meaning</BUTTON>
+        <BR>
+        <BR>
+        <DIV CLASS="p-5 bg-success" ID="RESULT">
+        </DIV>
+        
+
+
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <SCRIPT>
+            function fetch_meaning(word)
+            {
+                fetch("https://api.dictionaryapi.dev/api/v2/entries/en/"+word)
+                .then(function(response) {
+                return response.json();
+                                         })
+                .then(function(data) {
+                    a = data[0]['meanings'][0]['definitions']
+                    l = a.length
+                    console.log(a)
+                    for(let i=0; i<l; i++)
+                    {
+                        const box = document.getElementById("RESULT")
+                        const m = a[i]['definition']
+                        const para = document.createElement("p")
+                        const t = document.createTextNode(m)
+                        para.appendChild(t)
+                        box.appendChild(para)
+                        document.createElement("br")
+
+                    
+
+                    }
+                    console.log(data)
+                    
+                
+            });
+            }
+
+            function f()
+            {
+                word = document.getElementById("WORD").value 
+                fetch_meaning(word)
+            }
+
+           
+            
+        </SCRIPT>
+    </DIV>
+    </BODY>
+</HTML>
